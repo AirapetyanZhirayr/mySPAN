@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*
 
-from load import *
+try:
+    from load import *
+except:
+    from mySPAN1.load import *
 import time
 from torch import optim
 import torch.utils.data as data
 from tqdm import tqdm
-from models import *
-
+try:
+    from models import *
+except:
+    from mySPAN1.models import *
 
 def calculate_acc(prob, label):
     # log_prob (N, L), label (N), batch_size [*M]

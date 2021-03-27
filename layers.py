@@ -1,4 +1,7 @@
-from load import *
+try:
+    from load import *
+except:
+    from mySPAN1.load import *
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -24,7 +27,7 @@ def to_npy(x):
     return x.cpu().data.numpy() if device == 'cuda' else x.detach().numpy()
 
 
-class Attn(nn.Module
+class Attn(nn.Module):
     def __init__(self, emb_loc, loc_max, dropout=0.1):
         super(Attn, self).__init__()
         self.value = nn.Linear(max_len, 1, bias=False)

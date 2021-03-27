@@ -8,6 +8,7 @@ import joblib
 from torch.nn.utils.rnn import pad_sequence
 
 max_len = 100  # max traj len; i.e., M
+max_len = 15
 
 
 def haversine(lon1, lat1, lon2, lat2):
@@ -90,7 +91,7 @@ def rs_mat2s(poi, l_max):
     candidate_loc = np.linspace(1, l_max, l_max)  # (L)
     mat = np.zeros((l_max, l_max))  # mat (L, L)
     for i, loc1 in enumerate(candidate_loc):
-        print(i) if i % 100 == 0 else None
+        # print(i) if i % 100 == 0 else None
         for j, loc2 in enumerate(candidate_loc):
             poi1, poi2 = poi[int(loc1) - 1], poi[int(loc2) - 1]  # retrieve poi by loc_id
             mat[i, j] = haversine(lon1=poi1[2], lat1=poi1[1], lon2=poi2[2], lat2=poi2[1])
