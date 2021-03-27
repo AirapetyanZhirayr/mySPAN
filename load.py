@@ -21,7 +21,11 @@ def haversine(lon1, lat1, lon2, lat2):
     dlon = lon2 - lon1
     dlat = lat2 - lat1
     a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
-    c = 2 * asin(sqrt(a))
+    try:
+        c = 2 * asin(sqrt(a))
+    except:
+        print('Error on haversine')
+        print(f"lon1:{lon1}, lat1:{lat1},lon2:{lon2},lat2:{lat2}")
     r = 6371
     return c * r
 
@@ -122,7 +126,7 @@ def process_traj(dname):  # start from 1
         user_traj = data[np.where(data_user == u_id)]  # find all check-ins of u_id
         user_traj = user_traj[np.argsort(user_traj[:, 2])].copy()  # sort traj by time
 
-        print(u_id, len(user_traj)) if u_id % 100 == 0 else None
+        print(u_id, len(user_traj)) if u_id % 1000 == 0 else None
 
         if len(user_traj) > max_len + 1:  # consider only the M+1 recent check-ins
             # 0:-3 are training data, 1:-2 is training label;
